@@ -3,10 +3,13 @@ module github.com/lightninglabs/aperture
 go 1.15
 
 require (
-	github.com/btcsuite/btcd v0.21.0-beta.0.20210513141527-ee5896bad5be
+	git.schwanenlied.me/yawning/bsaes.git v0.0.0-20190320102049-26d1add596b6 // indirect
+	github.com/NebulousLabs/fastrand v0.0.0-20181203155948-6fb6489aac4e // indirect
+	github.com/btcsuite/btcd v0.22.0-beta.0.20220207191057-4dc4ff7963b4
+	github.com/btcsuite/btcd/btcec/v2 v2.1.0
+	github.com/btcsuite/btcd/btcutil v1.1.0
 	github.com/btcsuite/btclog v0.0.0-20170628155309-84c8d2346e9f
-	github.com/btcsuite/btcutil v1.0.3-0.20210527170813-e2ba6805a890
-	github.com/btcsuite/btcwallet/wtxmgr v1.3.1-0.20210706234807-aaf03fee735a
+	github.com/btcsuite/btcwallet/wtxmgr v1.5.0
 	github.com/fortytw2/leaktest v1.3.0
 	github.com/golang/protobuf v1.5.2
 	github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0
@@ -14,14 +17,15 @@ require (
 	github.com/jessevdk/go-flags v1.4.0
 	github.com/lightninglabs/lightning-node-connect/hashmailrpc v1.0.2
 	github.com/lightninglabs/lndclient v0.12.0-9
-	github.com/lightningnetwork/lnd v0.13.0-beta.rc5.0.20210728112744-ebabda671786
-	github.com/lightningnetwork/lnd/cert v1.0.3
+	github.com/lightningnetwork/lnd v0.14.2-beta
+	github.com/lightningnetwork/lnd/cert v1.1.1
+	github.com/lightningnetwork/lnd/tlv v1.0.2
 	github.com/prometheus/client_golang v1.11.0
 	github.com/stretchr/testify v1.7.0
 	go.etcd.io/etcd/client/v3 v3.5.1
 	go.etcd.io/etcd/server/v3 v3.5.1
-	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0
-	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4
+	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
 	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
 	google.golang.org/grpc v1.39.0
 	google.golang.org/protobuf v1.27.1
@@ -31,3 +35,16 @@ require (
 
 // Fix etcd token renewal issue https://github.com/etcd-io/etcd/pull/13262.
 replace go.etcd.io/etcd/client/v3 => github.com/lightninglabs/etcd/client/v3 v3.5.1-retry-patch
+
+// Note(carla): this replace updates our lndclient to one that's using the
+// correct btcsuite modules.
+replace github.com/lightninglabs/lndclient => github.com/carlaKC/lndclient v0.0.0-20220316104802-80ca2a82bd86
+
+// TODO(carla): update once tappy is merged all around the world.
+replace (
+	github.com/btcsuite/btcd => github.com/Roasbeef/btcd v0.0.0-20220309025241-21f170aa104d
+	github.com/btcsuite/btcd/btcec/v2 => github.com/Roasbeef/btcd/btcec/v2 v2.0.0-20220309025241-21f170aa104d
+	github.com/btcsuite/btcwallet => github.com/guggero/btcwallet v0.13.1-0.20220309190142-cb37aecb5d28
+	github.com/btcsuite/btcwallet/wallet/txauthor => github.com/guggero/btcwallet/wallet/txauthor v1.1.1-0.20220309190142-cb37aecb5d28
+	github.com/lightningnetwork/lnd => github.com/guggero/lnd v0.11.0-beta.rc4.0.20220315135120-eea52c82365d
+)
